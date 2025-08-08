@@ -1,0 +1,283 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOK2/US9U4Tisu0kkJPRU0L",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/2303A51540/ADM-Lab/blob/main/NLP%20LAB%201\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "MhJByasb3TUl",
+        "outputId": "aa5e7140-a150-4ec9-91f4-911d92182bd3"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Requirement already satisfied: nltk in /usr/local/lib/python3.11/dist-packages (3.9.1)\n",
+            "Requirement already satisfied: click in /usr/local/lib/python3.11/dist-packages (from nltk) (8.2.1)\n",
+            "Requirement already satisfied: joblib in /usr/local/lib/python3.11/dist-packages (from nltk) (1.5.1)\n",
+            "Requirement already satisfied: regex>=2021.8.3 in /usr/local/lib/python3.11/dist-packages (from nltk) (2024.11.6)\n",
+            "Requirement already satisfied: tqdm in /usr/local/lib/python3.11/dist-packages (from nltk) (4.67.1)\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package punkt to /root/nltk_data...\n",
+            "[nltk_data]   Unzipping tokenizers/punkt.zip.\n",
+            "[nltk_data] Downloading package punkt_tab to /root/nltk_data...\n",
+            "[nltk_data]   Unzipping tokenizers/punkt_tab.zip.\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "['I', 'woke', 'up', 'at', '6', 'am', 'in', 'the', 'morning.I', 'brushed', ',', 'bathed', 'and', 'then', 'had', 'my', 'breakfast.I', 'reached', 'college', 'by', '9:56', 'am', '.', 'I', 'checked', 'my', 'timetable', ',', 'NLP', '(', 'Natural', 'Language', 'Processing', ')', 'lab', 'was', 'assigned', 'in', '(', 'room', 'no', '3111', ')', '.I', 'took', 'my', 'seat', 'and', 'started', 'doing', 'lab', 'assignments', '.']\n",
+            "53\n"
+          ]
+        }
+      ],
+      "source": [
+        "!pip install nltk\n",
+        "import nltk\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "nltk.download('punkt')\n",
+        "nltk.download('punkt_tab')\n",
+        "sentence = \"I woke up at 6 am in the morning.I brushed ,bathed and then had my breakfast.I reached college by 9:56 am . I checked my timetable, NLP(Natural Language Processing) lab was assigned in (room no 3111) .I took my seat and started doing lab assignments.\"\n",
+        "tokens = word_tokenize(sentence)\n",
+        "print(tokens)\n",
+        "length=len(tokens)\n",
+        "print(length)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import nltk\n",
+        "nltk.download('stopwords')\n",
+        "from nltk.corpus import stopwords\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "rohan=\"There is a boy named Rohan. He is 9 years old, he is in 3rd class now. He is highly active, intelligent and smartest kid amongst other kids.One day he had gone to playground and started playing with the ball without telling mom, everyne in the family were seaching for him but they couldn't find him. But in the end they found him playing in the ground .\"\n",
+        "tokens = word_tokenize(rohan)\n",
+        "print(tokens)\n",
+        "length=len(tokens)\n",
+        "print(length)\n",
+        "\n",
+        "stop_words=set(stopwords.words(\"english\"))\n",
+        "print(stop_words)\n",
+        "\n",
+        "\n",
+        "sam=[word for word in tokens if not word in stop_words]\n",
+        "print(sam)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "4k_W8WFW3_9F",
+        "outputId": "2bed485a-2428-48a1-ccb6-68cbce97287b"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "['There', 'is', 'a', 'boy', 'named', 'Rohan', '.', 'He', 'is', '9', 'years', 'old', ',', 'he', 'is', 'in', '3rd', 'class', 'now', '.', 'He', 'is', 'highly', 'active', ',', 'intelligent', 'and', 'smartest', 'kid', 'amongst', 'other', 'kids.One', 'day', 'he', 'had', 'gone', 'to', 'playground', 'and', 'started', 'playing', 'with', 'the', 'ball', 'without', 'telling', 'mom', ',', 'everyne', 'in', 'the', 'family', 'were', 'seaching', 'for', 'him', 'but', 'they', 'could', \"n't\", 'find', 'him', '.', 'But', 'in', 'the', 'end', 'they', 'found', 'him', 'playing', 'in', 'the', 'ground', '.']\n",
+            "75\n",
+            "{'did', 'why', \"he's\", 'been', 'mustn', 'be', 'needn', 'very', 'about', 'each', 'me', 'or', 'can', 'their', 'do', \"mustn't\", 'while', 'those', 'they', 'being', 'is', \"we'd\", 'him', 'just', 've', 're', 'few', 'ourselves', \"you'd\", 'most', 'was', \"she'd\", 'again', \"isn't\", \"she's\", 'himself', 'in', 'theirs', 'after', 'through', 'myself', 'during', 'his', \"you're\", 'what', 'my', 'hadn', \"it'd\", 'such', 'until', \"they're\", 'yourselves', 'the', 'for', \"we'll\", 'won', 'any', 'between', 'shan', 'as', 'll', 't', 'aren', \"hasn't\", 'her', 'this', \"we've\", \"won't\", 'where', \"you've\", 'you', 'further', 'over', 'm', 'am', 'd', 'nor', 'he', \"hadn't\", \"mightn't\", 'your', 'are', 'both', 'ma', \"doesn't\", 'have', 'that', \"he'd\", 'out', 'of', 'themselves', 'has', 'more', 'mightn', 'below', \"i'm\", 'too', 'were', 'couldn', \"wouldn't\", 'who', 'itself', 'an', \"couldn't\", 'wasn', 'off', 'she', 'don', 'same', 'hasn', \"i've\", 'didn', 'does', 'how', 'under', \"she'll\", 'above', \"haven't\", 'we', \"they've\", \"it'll\", 'not', 'a', \"should've\", 'y', 'yours', 'isn', 'if', 'ours', 'wouldn', \"it's\", 'than', 'o', 'weren', \"shan't\", 'which', \"i'll\", 'yourself', 'herself', 'i', 'by', 'now', 's', 'doing', \"we're\", 'will', 'own', \"didn't\", 'down', 'when', \"needn't\", 'them', 'haven', 'against', 'its', 'here', 'but', 'doesn', 'had', 'into', 'only', 'other', 'ain', \"that'll\", 'these', 'at', 'no', 'our', \"you'll\", \"weren't\", 'from', \"shouldn't\", 'on', 'whom', 'there', 'should', \"they'll\", 'because', \"he'll\", \"wasn't\", 'having', 'before', 'then', 'hers', 'to', 'all', \"i'd\", 'some', 'and', \"don't\", 'it', 'up', 'once', \"aren't\", 'shouldn', \"they'd\", 'with', 'so'}\n",
+            "['There', 'boy', 'named', 'Rohan', '.', 'He', '9', 'years', 'old', ',', '3rd', 'class', '.', 'He', 'highly', 'active', ',', 'intelligent', 'smartest', 'kid', 'amongst', 'kids.One', 'day', 'gone', 'playground', 'started', 'playing', 'ball', 'without', 'telling', 'mom', ',', 'everyne', 'family', 'seaching', 'could', \"n't\", 'find', '.', 'But', 'end', 'found', 'playing', 'ground', '.']\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package stopwords to /root/nltk_data...\n",
+            "[nltk_data]   Unzipping corpora/stopwords.zip.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import nltk\n",
+        "import nltk.stem as stemmer\n",
+        "from nltk.stem import PorterStemmer\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "aol=\"Running quickly through the forest, the children happily played, jumping, shouting, and laughing. Their voices echoed, and the joyful sounds carried far, reminding everyone that happiness often comes from sharing simple moments and creating lasting memories\"\n",
+        "stemmer = PorterStemmer()\n",
+        "tokens = word_tokenize(aol)\n",
+        "stemmed_words = [stemmer.stem(word) for word in tokens]\n",
+        "print( tokens)\n",
+        "print(stemmed_words)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sgbJzfGE6Izc",
+        "outputId": "3bc7f480-39c1-495b-8a6b-0dcfbe80d383"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "['Running', 'quickly', 'through', 'the', 'forest', ',', 'the', 'children', 'happily', 'played', ',', 'jumping', ',', 'shouting', ',', 'and', 'laughing', '.', 'Their', 'voices', 'echoed', ',', 'and', 'the', 'joyful', 'sounds', 'carried', 'far', ',', 'reminding', 'everyone', 'that', 'happiness', 'often', 'comes', 'from', 'sharing', 'simple', 'moments', 'and', 'creating', 'lasting', 'memories']\n",
+            "['run', 'quickli', 'through', 'the', 'forest', ',', 'the', 'children', 'happili', 'play', ',', 'jump', ',', 'shout', ',', 'and', 'laugh', '.', 'their', 'voic', 'echo', ',', 'and', 'the', 'joy', 'sound', 'carri', 'far', ',', 'remind', 'everyon', 'that', 'happi', 'often', 'come', 'from', 'share', 'simpl', 'moment', 'and', 'creat', 'last', 'memori']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import nltk\n",
+        "import nltk.stem as stemmer\n",
+        "from nltk.stem import PorterStemmer\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "aol=\"The children were playing happily in the garden while their parents were watching them from the balcony. They had been planning this picnic for weeks. Everyone enjoyed running around, laughing loudly, and eating homemade sandwiches.\"\n",
+        "stemmer = PorterStemmer()\n",
+        "tokens = word_tokenize(aol)\n",
+        "stemmed_words = [stemmer.stem(word) for word in tokens]\n",
+        "print( tokens)\n",
+        "print(stemmed_words)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "VMGHwZ7WDQ9b",
+        "outputId": "07d0de58-58b0-490b-b7e4-92322f0489f4"
+      },
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "['The', 'children', 'were', 'playing', 'happily', 'in', 'the', 'garden', 'while', 'their', 'parents', 'were', 'watching', 'them', 'from', 'the', 'balcony', '.', 'They', 'had', 'been', 'planning', 'this', 'picnic', 'for', 'weeks', '.', 'Everyone', 'enjoyed', 'running', 'around', ',', 'laughing', 'loudly', ',', 'and', 'eating', 'homemade', 'sandwiches', '.']\n",
+            "['the', 'children', 'were', 'play', 'happili', 'in', 'the', 'garden', 'while', 'their', 'parent', 'were', 'watch', 'them', 'from', 'the', 'balconi', '.', 'they', 'had', 'been', 'plan', 'thi', 'picnic', 'for', 'week', '.', 'everyon', 'enjoy', 'run', 'around', ',', 'laugh', 'loudli', ',', 'and', 'eat', 'homemad', 'sandwich', '.']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import nltk\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "from nltk.stem import WordNetLemmatizer\n",
+        "nltk.download('wordnet')\n",
+        "sentence  = \" The children were playing happily in the garden while their parents were watching them from the balcony. They had been planning this picnic for weeks. Everyone enjoyed running around, laughing loudly, and eating homemade sandwiches.\"\n",
+        "\n",
+        "tokens = word_tokenize(sentence)\n",
+        "print (\"Token is : \", tokens )\n",
+        "Lemmatizer=WordNetLemmatizer()\n",
+        "L_Tokens=[Lemmatizer.lemmatize(word) for word in tokens ]\n",
+        "print (\"Lemmatizer is : \", L_Tokens)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "yQGpy_L_DmFz",
+        "outputId": "f44186b8-e23d-463c-ce9a-402949a9493a"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Token is :  ['The', 'children', 'were', 'playing', 'happily', 'in', 'the', 'garden', 'while', 'their', 'parents', 'were', 'watching', 'them', 'from', 'the', 'balcony', '.', 'They', 'had', 'been', 'planning', 'this', 'picnic', 'for', 'weeks', '.', 'Everyone', 'enjoyed', 'running', 'around', ',', 'laughing', 'loudly', ',', 'and', 'eating', 'homemade', 'sandwiches', '.']\n",
+            "Lemmatizer is :  ['The', 'child', 'were', 'playing', 'happily', 'in', 'the', 'garden', 'while', 'their', 'parent', 'were', 'watching', 'them', 'from', 'the', 'balcony', '.', 'They', 'had', 'been', 'planning', 'this', 'picnic', 'for', 'week', '.', 'Everyone', 'enjoyed', 'running', 'around', ',', 'laughing', 'loudly', ',', 'and', 'eating', 'homemade', 'sandwich', '.']\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package wordnet to /root/nltk_data...\n",
+            "[nltk_data]   Package wordnet is already up-to-date!\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import nltk\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "from nltk.stem import WordNetLemmatizer\n",
+        "nltk.download('wordnet')\n",
+        "sentence  = \"the  lion roar loudly in the frorest at night always.\"\n",
+        "\n",
+        "tokens = word_tokenize(sentence)\n",
+        "print (\"Token is : \", tokens )\n",
+        "Lemmatizer=WordNetLemmatizer()\n",
+        "L_Tokens=[Lemmatizer.lemmatize(word) for word in tokens ]\n",
+        "print (\"Lemmatizer is : \", L_Tokens)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Bdxz4lj07Ph9",
+        "outputId": "9381a204-acba-48e7-ec9b-7b10d055b3a5"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Token is :  ['the', 'lion', 'roar', 'loudly', 'in', 'the', 'frorest', 'at', 'night', 'always', '.']\n",
+            "Lemmatizer is :  ['the', 'lion', 'roar', 'loudly', 'in', 'the', 'frorest', 'at', 'night', 'always', '.']\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package wordnet to /root/nltk_data...\n",
+            "[nltk_data]   Package wordnet is already up-to-date!\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
